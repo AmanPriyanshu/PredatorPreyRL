@@ -12,7 +12,7 @@ if __name__ == '__main__':
 	env.predator_model.load_state_dict(torch.load("pred_model.pt"))
 	for i in trange(50):
 		env.prey.epsilon = 1.0
-		for pred in env.preds:
+		for idx, pred in enumerate(env.preds):
 			pred.epsilon = 1.0
 		env.take_actions()
 		colored_map = env.plot(False)
