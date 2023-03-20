@@ -140,15 +140,18 @@ class Environment:
 			self.step_count = 0
 		return prey_reward, predator_rewards
 
-	def plot(self):
+	def plot(self, visualize=True):
 		colored_map = self.landscape.get_truemap()
 		colored_map[self.prey.x-5:self.prey.x+5, self.prey.y-5:self.prey.y+5, :] = 0
 		for pred in self.preds:
 			colored_map[pred.x-7:pred.x+7, pred.y-7:pred.y+7, :] = 1
 		#return colored_map
-		cv2.imshow("", colored_map)
-		cv2.waitKey(0)
-		cv2.destroyAllWindows()
+		if visualize:
+			cv2.imshow("", colored_map)
+			cv2.waitKey(0)
+			cv2.destroyAllWindows()
+		else:
+			return colored_map
 
 	def train_step(self, batch_size=8, epochs=100):
 		for epoch in range(epochs):
